@@ -99,6 +99,7 @@ public class DesktopDashboardFragment extends ObservablePreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        displayResourceTiles();
         mDesktopStatusSummary = getPreferenceScreen().findPreference(KEY_DESKTOP_STATUS);
         mDesktopStatusSummary.setIcon(com.android.settingslib.R.drawable.ic_info_outline_24dp);
         mDesktopStatusSummary.setSelectable(false);
@@ -300,5 +301,17 @@ public class DesktopDashboardFragment extends ObservablePreferenceFragment
             updateDesktopStateIfNeeded(state);
             mOverrideShutdownDialog = false;
         }
+    }
+
+    private void displayResourceTiles() {
+        final int resId = getPreferenceScreenResId();
+        if (resId <= 0) {
+            return;
+        }
+        addPreferencesFromResource(resId);
+    }
+
+    public int getPreferenceScreenResId() {
+        return R.xml.desktop_dashboard;
     }
 }
